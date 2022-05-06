@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cerulean Bee</title>
+
+    <!-- Favicon -->
+    <!-- <link rel="shortcut icon" href="{% static 'student/favicon.ico' %}" /> -->
+
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <!-- Fontawesome CDN -->
+    <script
+      src="https://kit.fontawesome.com/a4598e0196.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'app/css/styles.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 fixed-top">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand px-3" href="/">Cerulean Bee </a>
+
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a
+              class="nav-link text-danger px-3 logout-btn"
+              href=" {% url 'app:logout' %}"
+            >
+              <span>Logout</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-box-arrow-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- SideBar -->
+    <div class="container-fluid">
+      <div class="row">
+        <nav
+          id="navbarToggleExternalContent"
+          id="sidebarMenu"
+          class="col-2 d-lg-block p-0 bg-light sidebar collapse"
+        >
+          <div class="position-sticky" style="height: 100%">
+            <ul class="nav flex-column fs-6">
+              <li class="nav-item">
+                <a
+                  class="nav-link {% if route == 'dashboard' %}active{% endif %}"
+                  aria-current="page"
+                  href="/"
+                >
+                  <i class="fas fa-home"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link {% if route == 'artwork' %}active{% endif %}"
+                  href="/artwork"
+                >
+                  <i class="fas fa-store"></i>
+                  <span>Artwork Order</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link {% if route == 'employee' %}active{% endif %}"
+                  href="/employee"
+                >
+                  <i class="fas fa-users"></i>
+                  <span>Employee Work Details</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link {% if route == 'orders' %}active{% endif %}"
+                  href="/print-orders"
+                >
+                  <i class="fas fa-print"></i>
+                  <span>Print Orders</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link {% if route == 'analysis' %}active{% endif %}"
+                  href="/cost-analysis"
+                >
+                  <i class="fas fa-chart-pie"></i>
+                  <span>Project Cost Analysis</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main Components -->
+        <div class="navDivider"></div>
+        <main class="col-lg-10 ms-sm-auto p-4 page-container" id="page">
+          {%block container%} {% endblock %}
+        </main>
+      </div>
+      <div class="messages">
+        {% if message != '' %}
+        <span>{{messgae}}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% block script %} {% endblock %}
+
+    <!-- Bootstrap JS CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+      integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+      integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

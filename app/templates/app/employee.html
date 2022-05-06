@@ -1,0 +1,58 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+<div class="app-container">
+  <div class="header-btn d-flex mb-3">
+    <a class="btn btn-primary px-5" href=" {% url 'app:create_employee' %}"
+      >Add Employee Work Log</a
+    >
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">Customer ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Order Date</th>
+          <th scope="col">Work Type</th>
+          <th scope="col">Task</th>
+          <th scope="col" style="width: 170px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+        <tr>
+          <th scope="row">{{employee.id}}</th>
+          <td>{{employee.employee_name}}</td>
+          <td>{{employee.phone}}</td>
+          <td>{{employee.date}}</td>
+          <td>{{employee.work_type}}</td>
+          <td>{{employee.task}}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a
+                type="button"
+                class="btn border text-primary"
+                href="/view-employee/{{employee.id}}"
+                ><i class="fas fa-clipboard"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-success"
+                href="/edit-employee/{{employee.id}}"
+                ><i class="fas fa-pen"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-danger"
+                href="{% url 'app:delete_employee' id=employee.id %}"
+                ><i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

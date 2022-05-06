@@ -1,0 +1,496 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+
+<div class="dashboard_contents p-top-50">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-10">
+        <h2>PROJECT COST ANALYSIS</h2>
+      </div>
+      <div class="col-md-2 p-bottom-25">
+        <a href="{% url 'app:cost_analysis' %}">
+          <button
+            class="btn btn--icon btn-md btn--round btn-secondary"
+            style="float: right"
+          >
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="container">
+    <form
+      method="post"
+      action="{% if edit %}/edit-cost-analysis/{{data.id}}{% else %}{% url 'app:create_cost_analysis' %}{% endif %}"
+    >
+      {% csrf_token %}
+      <div>
+        <!-- Customer Information -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Customer Information</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Project Name</label>
+                    <input
+                      type="text"
+                      name="project_name"
+                      value="{{data.project_name}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Event</label>
+                    <input
+                      type="text"
+                      name="event_name"
+                      value="{{data.event_name}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Item</label>
+                    <input
+                      type="text"
+                      name="item_name"
+                      value="{{data.item_name}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Customer Name</label>
+                    <input
+                      type="text"
+                      name="customer_name"
+                      value="{{data.customer_name}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value="{{data.phone}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Material Costs -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Material Costs</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Item</th>
+                      <th scope="col">Per-Unit Cost</th>
+                      <th scope="col">Price Charged</th>
+                      <th scope="col">Units</th>
+                      <th scope="col">Cost</th>
+                      <th scope="col">Revenue</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_item_1"
+                          value="{{data.mc_item_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_unitcost_1"
+                          value="{{data.mc_unitcost_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_pricecharge_1"
+                          value="{{data.mc_pricecharge_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_units_1"
+                          value="{{data.mc_units_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_cost_1"
+                          value="{{data.mc_cost_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_revenue_1"
+                          value="{{data.mc_revenue_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_item_2"
+                          value="{{data.mc_item_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_unitcost_2"
+                          value="{{data.mc_unitcost_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_pricecharge_2"
+                          value="{{data.mc_pricecharge_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_units_2"
+                          value="{{data.mc_units_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_cost_2"
+                          value="{{data.mc_cost_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          name="mc_revenue_2"
+                          value="{{data.mc_revenue_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="text-end">Total</td>
+                      <td>
+                        <input
+                          type="text"
+                          name="totalcost"
+                          value="{{data.totalcost}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+
+                      <td>
+                        <input
+                          type="text"
+                          name="totalrevenue"
+                          value="{{data.totalrevenue}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Labour Costs -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Labour Costs</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="table-responsive">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Employee</th>
+                      <th scope="col">Task</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Wage Rate</th>
+                      <th scope="col">Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_employee_1"
+                          value="{{data.lc_employee_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_task_1"
+                          value="{{data.lc_task_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_time_1"
+                          value="{{data.lc_time_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_rate_1"
+                          value="{{data.lc_rate_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_cost_1"
+                          value="{{data.lc_cost_1}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_employee_2"
+                          value="{{data.lc_employee_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_task_2"
+                          value="{{data.lc_task_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_time_2"
+                          value="{{data.lc_time_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_rate_2"
+                          value="{{data.lc_rate_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="lc_cost_2"
+                          value="{{data.lc_cost_2}}"
+                          {{readonly}}
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="4" class="text-end">Total</td>
+                      <td>
+                        <div class="col-12" style="margin-left: auto">
+                          <input
+                            type="text"
+                            name="lc_total"
+                            value="{{data.lc_total}}"
+                            {{readonly}}
+                            class="form-control"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Money Received -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Total Money Received</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Material Charge</label>
+                    <input
+                      type="text"
+                      name="material_charge"
+                      value="{{data.material_charge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Artwork Fees</label>
+                    <input
+                      type="text"
+                      name="artwork_fees"
+                      value="{{data.artwork_fees}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Fixed Charges</label>
+                    <input
+                      type="number"
+                      name="fixed_charges"
+                      value="{{data.fixed_charges}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Discounts</label>
+                    <input
+                      type="text"
+                      name="total_discounts"
+                      value="{{data.total_discounts}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Net Profit</label>
+                    <input
+                      type="text"
+                      name="net_profits"
+                      value="{{data.net_profits}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        {% if readonly %}
+        <div></div>
+        {% else %}
+        <div class="col-md-12">
+          <div class="dashboard_setting_btn">
+            <button type="submit" class="btn btn--md btn-primary">
+              Save Change
+            </button>
+            <a
+              type="reset"
+              class="btn btn-md btn-danger"
+              href="{% url 'app:cost_analysis' %}"
+              >Cancel</a
+            >
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

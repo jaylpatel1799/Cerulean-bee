@@ -1,0 +1,58 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+<div class="app-container">
+  <div class="header-btn d-flex mb-3">
+    <a class="btn btn-primary px-5" href=" {% url 'app:create_cost_analysis' %}"
+      >Add Project Cost</a
+    >
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">Project ID</th>
+          <th scope="col">Project Name</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Art Item</th>
+          <th scope="col">Event</th>
+          <th scope="col">Net Profit</th>
+          <th scope="col" style="width: 170px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.project_name}}</td>
+          <td>{{order.customer_name}}</td>
+          <td>{{order.item_name}}</td>
+          <td>{{order.event_name}}</td>
+          <td>{{order.net_profits}}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a
+                type="button"
+                class="btn border text-primary"
+                href="/view-cost-analysis/{{order.id}}"
+                ><i class="fas fa-clipboard"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-success"
+                href="/edit-cost-analysis/{{order.id}}"
+                ><i class="fas fa-pen"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-danger"
+                href="{% url 'app:delete_cost_analysis' id=order.id %}"
+                ><i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

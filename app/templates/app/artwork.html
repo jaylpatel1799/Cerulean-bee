@@ -1,0 +1,54 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+<div class="app-container">
+  <div class="header-btn d-flex mb-3">
+    <a class="btn btn-primary px-5" href=" {% url 'app:create_artwork' %}"
+      >Add Artwork Order</a
+    >
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">Customer ID</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Order Date</th>
+          <th scope="col" style="width: 170px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.customer_name}}</td>
+          <td>{{order.phone}}</td>
+          <td>{{order.order_date}}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <a
+                type="button"
+                class="btn border text-primary"
+                href="/view-artwork/{{order.id}}"
+                ><i class="fas fa-clipboard"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-success"
+                href="/edit-artwork/{{order.id}}"
+                ><i class="fas fa-pen"></i
+              ></a>
+              <a
+                type="button"
+                class="btn border text-danger"
+                href="{% url 'app:delete_artwork' id=order.id %}"
+                ><i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

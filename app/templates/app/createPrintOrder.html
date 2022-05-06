@@ -1,0 +1,552 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+
+<div class="dashboard_contents p-top-50">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-10">
+        <h2>PRINT ORDER</h2>
+      </div>
+      <div class="col-md-2 p-bottom-25">
+        <a href="{% url 'app:print_orders' %}">
+          <button
+            class="btn btn--icon btn-md btn--round btn-secondary"
+            style="float: right"
+          >
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="container">
+    <form
+      method="post"
+      action="{% if edit %}/edit-print-order/{{data.id}}{% else %}{% url 'app:create_print_order' %}{% endif %}"
+    >
+      {% csrf_token %}
+      <div>
+        <!-- Customer Information -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Customer Information</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Customer Name</label>
+                    <input
+                      type="text"
+                      name="customer_name"
+                      value="{{data.customer_name}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Order Date</label>
+                    <input
+                      type="date"
+                      name="orderdate"
+                      value='{{data.orderdate|date:"Y-m-d"}}'
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      name="emailid"
+                      value="{{data.emailid}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Art/Slide Date</label>
+                    <input type="date" name="artdate"
+                    value='{{data.artdate|date:"Y-m-d"}}'' {{readonly}}
+                    class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value="{{data.phone}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Due Date</label>
+                    <input
+                      type="date"
+                      name="duedate"
+                      value='{{data.duedate|date:"Y-m-d"}}'
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Setup Charge</label>
+                    <input
+                      type="number"
+                      name="setupcharge"
+                      value="{{data.setupcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Apparel Order Date</label>
+                    <input
+                      type="date"
+                      name="apparelorderdate"
+                      value='{{data.apparelorderdate|date:"Y-m-d"}}'
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Deposit</label>
+                    <input
+                      type="text"
+                      name="deposit"
+                      value="{{data.deposit}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Art/Film Date</label>
+                    <input
+                      type="date"
+                      name="filmdate"
+                      value='{{data.filmdate|date:"Y-m-d"}}'
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Discount</label>
+                    <input
+                      type="number"
+                      name="discount"
+                      value="{{data.discount}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Print Date</label>
+                    <input type="date" name="printdate"
+                    value='{{data.printdate|date:"Y-m-d"}}'' {{readonly}}
+                    class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Total Cost</label>
+                    <input
+                      type="number"
+                      name="totalcost"
+                      value="{{data.totalcost}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Delivered Date</label>
+                    <input
+                      type="date"
+                      name="delivereddate"
+                      value='{{data.delivereddate|date:"Y-m-d"}}'
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Artwork Items -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Artwork Items</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-5">
+                    <label class="form-label">Base Color</label>
+                    <input
+                      type="text"
+                      name="basecolor"
+                      value="{{data.basecolor}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-5">
+                    <label class="form-label">Vendor</label>
+                    <input
+                      type="text"
+                      name="vendorname"
+                      value="{{data.vendorname}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <h6>Size</h6>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <h6>Quantity</h6>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <h6>Price</h6>
+                  </div>
+                </div>
+
+                <!-- XS -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">X-Small</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xsnumber"
+                      value="{{data.xsnumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xscharge"
+                      value="{{data.xscharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <!-- Small -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">Small</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="snumber"
+                      value="{{data.snumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="scharge"
+                      value="{{data.scharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <!-- Medium -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">Medium</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="mnumber"
+                      value="{{data.mnumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="mcharge"
+                      value="{{data.mcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <!-- Large -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">Large</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="lnumber"
+                      value="{{data.lnumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="lcharge"
+                      value="{{data.lcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <!-- X-Large -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">X-Large</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xlnumber"
+                      value="{{data.xlnumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xlcharge"
+                      value="{{data.xlcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <!-- XX-Large -->
+                <div class="col-md-2">
+                  <div class="mb-3">
+                    <label class="form-label">XX-Large</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xxlnumber"
+                      value="{{data.xxlnumber}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      name="xxlcharge"
+                      value="{{data.xxlcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Per Unit Base Price</label>
+                    <input
+                      type="text"
+                      name="unitbaseprice"
+                      value="{{data.unitbaseprice}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Color Charge</label>
+                    <input
+                      type="text"
+                      name="colorcharge"
+                      value="{{data.colorcharge}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Total Blank Price</label>
+                    <input
+                      type="text"
+                      name="blankprice"
+                      value="{{data.blankprice}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Artwork Print -->
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Artwork Print</h4>
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Location Size</label>
+                    <input
+                      type="text"
+                      name="locationsize"
+                      value="{{data.locationsize}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Color Charge</label>
+                    <input
+                      type="text"
+                      name="colorchange"
+                      value="{{data.colorchange}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <label class="form-label">Colors Lists</label>
+                    <textarea
+                      {{readonly}}
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      name="colorlist"
+                      rows="3"
+                    >
+{{data.colorlist}}</textarea
+                    >
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <label class="form-label">Cost</label>
+                    <input
+                      type="number"
+                      name="finalcost"
+                      value="{{data.finalcost}}"
+                      {{readonly}}
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        {% if readonly %}
+        <div></div>
+        {% else %}
+        <div class="col-md-12">
+          <div class="dashboard_setting_btn">
+            <button type="submit" class="btn btn--md btn-primary">
+              Save Change
+            </button>
+            <a
+              type="reset"
+              class="btn btn-md btn-danger"
+              href="{% url 'app:print_orders' %}"
+              >Cancel</a
+            >
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

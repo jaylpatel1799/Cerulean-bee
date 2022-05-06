@@ -1,0 +1,38 @@
+{% extends 'app/layout.html' %} {% load static%} {% block container %}
+<div id="dashboard">
+  <div class="card-group">
+    <div class="card text-center rounded" style="width: 18rem; height: 170px">
+      <div class="card-body" style="background-color: #deecdf">
+        <span class="fs-2">{{data.artworkCount}}</span>
+      </div>
+      <div class="card-footer">
+        <span>Artwork Orders</span>
+      </div>
+    </div>
+    <div class="card text-center rounded" style="width: 18rem; height: 170px">
+      <div class="card-body" style="background-color: #feeed7">
+        <span class="fs-2">{{data.employeeCount}}</span>
+      </div>
+      <div class="card-footer">
+        <span>Employee Work Details</span>
+      </div>
+    </div>
+    <div class="card text-center rounded" style="width: 18rem; height: 170px">
+      <div class="card-body" style="background-color: #e1eefa">
+        <span class="fs-2">{{data.printOrder}}</span>
+      </div>
+      <div class="card-footer">
+        <span>Print Orders</span>
+      </div>
+    </div>
+    <div class="card text-center rounded" style="width: 18rem; height: 170px">
+      <div class="card-body" style="background-color: #f2e7ff">
+        <span class="fs-2">{{data.cost}}</span>
+      </div>
+      <div class="card-footer">
+        <span>Project Cost Analysis</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
